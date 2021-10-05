@@ -1,0 +1,119 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+C#, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <stdio.h>
+#include<stdlib.h>
+
+void in_rear(int x[],int *front ,int *rear,int n)
+{
+    int num;
+    printf("Enter the element to insert : ");
+    scanf("%d",&num);
+    if(*front == -1 && *rear ==-1)
+    {
+        *front = 0;
+        *rear = 0;
+        x[*rear] = num;
+    }
+    else if(*rear == n-1)
+    {
+        printf("Queue overflow ");
+    }
+    else
+    {
+        (*rear)++;
+        x[*rear] = num;
+    }
+}
+
+void de_front(int x[],int *front ,int *rear ,int n)
+{
+    if(*front ==-1 || *front == n-1)
+    {
+        printf("Queue is empty");
+    }
+    else
+    {
+        printf("Element to be deleted : %d",x[*front]);
+        (*front)++;
+    }
+}
+
+void de_rear(int x[],int * front ,int * rear ,int n)
+{
+    if(*rear == -1 || (*front > *rear))
+    {
+        printf("Queue is empty ");
+    }
+    else
+    {
+        printf("Element to be deleted : %d",x[*rear]);
+        (*rear)--;
+    }
+}
+
+void in_front(int x[],int *front ,int *rear,int n)
+{
+    int num ;
+    if(*front == -1 || *front == 0)
+    {
+        printf("Queue overflow ");
+    }
+    else
+    {
+        printf("Enter the element to enter : ");
+        scanf("%d",&num);
+        (*front)--;
+        x[*front] = num;
+    }
+}
+
+void display(int x[],int front,int rear)
+{
+    int i;
+    printf("\n");
+    for(i=front;i<=rear;i++)
+    {
+        printf("%d ",x[i]);
+    }
+}
+
+int main()
+{
+    int n,front=-1,rear = -1,ch;
+    printf("Enter the Size of queue : ");
+    scanf("%d",&n);
+    int arr[n];
+    while(1)
+    {
+        printf("1.Insert at right\n");
+        printf("2.Insert at left\n");
+		printf("3.Delete from left\n");
+	    printf("4.Delete from right\n");
+	    printf("5.Display\n");
+	    printf("6.Quit\n");
+	    printf("Enter your choice : ");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+		    case 1:in_rear(arr,&front,&rear,n);
+		    break;
+		    case 2:in_front(arr,&front,&rear,n);
+		    break;
+		    case 3:de_front(arr,&front,&rear,n);
+		    break;
+		    case 4:de_rear(arr,&front,&rear,n);
+		    break;
+		    case 5:display(arr,front,rear);
+		    break;
+		    case 6:exit(1);
+		    break;
+		}
+    }
+    return 0;
+}
