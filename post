@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include<ctype.h>
+#include<math.h>
+#define MAX 20
+
+int stack[MAX];
+int top = -1;
+
+void push(int a)
+{
+    stack[++top] = a;
+}
+
+int pop()
+{
+    return stack[top--];
+}
+
+int main()
+{
+    int i,n,n1,n2;
+    char str[MAX];
+    printf("Enter the expression : ");
+    scanf("%s",str);
+    
+    for(i=0;str[i]!='\0';i++)
+    {
+        if(isdigit(str[i]))
+        {
+            n = str[i] - 48;
+            push(n);
+        }
+        else
+        {
+            n1 = pop();
+            n2 = pop();
+            switch(str[i])
+            {
+                case '+': n = n1 + n2;
+                break;
+                
+                case '-': n = n1 - n2;
+                break;
+                
+                case '*': n = n1 * n2;
+                break;
+                
+                case '/': n = n1 / n2;
+                break;
+                
+                case '^': n = pow(n1,n2);
+                break;
+                default : printf("You entered a wrong operator\n");
+            }
+            push(n);
+        }
+    }
+    printf("The Evaluated postflix expresstion (%s) = %d ",str,pop());
+    return 0;
+}
