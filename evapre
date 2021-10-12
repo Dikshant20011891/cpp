@@ -1,0 +1,63 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+C#, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <stdio.h>
+#include<ctype.h>
+#define MAX 20
+#include<math.h>
+#include<string.h>
+int stack[MAX];
+int top = -1;
+
+void push(int a)
+{
+    stack[++top] = a;
+}
+
+int pop()
+{
+    return stack[top--];
+}
+
+int main()
+{
+    int i,m,n1,n2,n;
+    char pre[MAX];
+    printf("Enter the Prefix Expression : ");
+    scanf("%s",pre);
+    m = strlen(pre) - 1;
+    for(i=m;i>=0;i--)
+    {
+        if(isdigit(pre[i]))
+        {
+            n = pre[i] - 48;
+            push(n);
+        }
+        else
+        {
+            n1 = pop();
+            n2 = pop();
+            switch(pre[i])
+            {
+                case '+':n = n1+n2;
+                break;
+                case '-':n = n1-n2;
+                break;
+                case '*':n = n1*n2;
+                break;
+                case '/':n = n1/n2;
+                break;
+                case '^':n = pow(n1,n2);
+                break;
+            }
+            push(n);
+        }
+    }
+    printf("%d",stack[top]);
+    return 0;
+}
