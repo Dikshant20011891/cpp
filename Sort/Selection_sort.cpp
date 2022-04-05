@@ -23,8 +23,10 @@ void selection_sort(int arr[],int n)
 	for(int i=0;i<n-1;i++)
 	{
 		int k = mini(arr,i,n);
-		swap(arr[k],arr[j]);
-		j++;
+		if(i!=k)
+		{
+			swap(arr[k],arr[j++]);
+		}
 	}
 }
 	 
